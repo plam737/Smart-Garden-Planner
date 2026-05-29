@@ -1,2 +1,2 @@
 # Smart-Garden-Planner
-Made to plan a smart garden!
+Plan a garden with this application!
