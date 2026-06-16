@@ -1,0 +1,29 @@
+[
+    {
+        "plant_id": 1,
+        "plant_name": "African Daisy",
+        "plant_type": "Perennial / Annual",
+        "spacing_inches": 12,
+        "water_inches_week": 1,
+        "sun_needs": "Full",
+        "native_region": "South Africa"
+    },
+    {
+        "plant_id": 2,
+        "plant_name": "Ageratum",
+        "plant_type": "Perennial / Annual",
+        "spacing_inches": 12,
+        "water_inches_week": 1,
+        "sun_needs": "Full",
+        "native_region": "Mexico"
+    },
+    {
+        "plant_id": 3,
+        "plant_name": "Alyssum",
+        "plant_type": "Annual",
+        "spacing_inches": 10,
+        "water_inches_week": 1,
+        "sun_needs": "Full",
+        "native_region": "Medditerranean"
+    }
+]
