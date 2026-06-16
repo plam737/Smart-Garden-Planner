@@ -5,6 +5,7 @@
         "plant_type": "Perennial / Annual",
         "spacing_inches": 12,
         "water_inches_week": 1,
+        "container_friendly": "True",
         "sun_needs": "Full",
         "native_region": "South Africa"
     },
@@ -14,16 +15,48 @@
         "plant_type": "Perennial / Annual",
         "spacing_inches": 12,
         "water_inches_week": 1,
+        "container_friendly": "False",
         "sun_needs": "Full",
         "native_region": "Mexico"
     },
     {
         "plant_id": 3,
-        "plant_name": "Alyssum",
+        "plant_name": "Alyssum - Purple",
         "plant_type": "Annual",
         "spacing_inches": 10,
         "water_inches_week": 1,
+        "container_friendly": "False",
         "sun_needs": "Full",
         "native_region": "Medditerranean"
+    },
+    {
+        "plant_id": 4,
+        "plant_name": "Alyssum - White",
+        "plant_type": "Annual",
+        "spacing_inches": 10,
+        "water_inches_week": 1,
+        "container_friendly": "False",
+        "sun_needs": "Full",
+        "native_region": "Medditerranean"
+    },
+    {
+        "plant_id": 5,
+        "plant_name": "Amaranth",
+        "plant_type": "Annual",
+        "spacing_inches": 12,
+        "water_inches_week": 1,
+        "container_friendly": "False",
+        "sun_needs": "Full",
+        "native_region": "Central and South America"
+    },
+    {
+        "plant_id": 6,
+        "plant_name": "Aster",
+        "plant_type": "Perennial",
+        "spacing_inches": 18,
+        "water_inches_week": 1,
+        "container_friendly": "False",
+        "sun_needs": "Full",
+        "native_region": "North America"
     }
 ]
