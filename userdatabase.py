@@ -11,7 +11,6 @@ def initialize_db():
             name TEXT,
             city TEXT,
             state TEXT,
-            garden_type TEXT,
             plant_variety TEXT,
             frequency TEXT,
             hard_zone TEXT
@@ -20,13 +19,13 @@ def initialize_db():
     conn.commit()
     conn.close()
 
-def create_new_user(username, password, name, city, state, garden_type, plant_variety, frequency, hard_zone):
+def create_new_user(username, password, name, city, state, plant_variety, frequency, hard_zone):
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
     hashed_pwd = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     cursor.execute("""
     INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (username, hashed_pwd, name, city, state, garden_type, plant_variety, frequency, hard_zone))
+    """, (username, hashed_pwd, name, city, state, plant_variety, frequency, hard_zone))
     conn.commit()
     conn.close()
 

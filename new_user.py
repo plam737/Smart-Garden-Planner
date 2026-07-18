@@ -17,15 +17,6 @@ def new_user_initiation():
     state = input("Which state or province do you live in? ")
     city = input("What city do you live in? ")
     
-    garden_type = 0
-    while garden_type not in range(1, 5):
-        try:
-            garden_type = int(input("What kind of garden do you have? \n" 
-                            " 1. Container Garden \n 2. In-Ground Garden\n 3. Raised Bed Garden \n 4. Mixed (a mix of Container, In-Ground, and Raised Bed) \n"))
-        except ValueError:
-            print("Please enter a number between 1-4.")
-            garden_type = 0  
-
     plant_variety = 0
     while plant_variety not in range(1, 5):
         try:
@@ -51,7 +42,7 @@ def new_user_initiation():
     password = getpass.getpass("What password would you like?")
     hard_zone = hardiness_zone(city, state)
     
-    new_user_creation(username, password, name, city, state, garden_type, plant_variety, frequency, hard_zone)
+    new_user_creation(username, password, name, city, state, plant_variety, frequency, hard_zone)
 
     print(f"Welcome, {name}!")
     if hard_zone == "NO":
@@ -59,16 +50,7 @@ def new_user_initiation():
     else: 
         print(f"Because you live in {city}, {state}, your hardiness zone is {hard_zone}!")
 
-def new_user_creation(username, password, name, city, state, garden_type, plant_variety, frequency, hard_zone):
-    
-    if (garden_type == 1):
-        garden_type = "Container"
-    elif (garden_type == 2):
-        garden_type = "In-Ground"
-    elif (garden_type == 3):
-        garden_type = "Raised Bed"
-    else:
-        garden_type = "Mixed"
+def new_user_creation(username, password, name, city, state, plant_variety, frequency, hard_zone):
 
     if (plant_variety == 1):
         plant_variety = "Fruits"
@@ -86,4 +68,4 @@ def new_user_creation(username, password, name, city, state, garden_type, plant_
     else: 
         frequency = "High"
 
-    userdatabase.create_new_user(username, password, name, city, state, garden_type, plant_variety, frequency, hard_zone)
+    userdatabase.create_new_user(username, password, name, city, state, plant_variety, frequency, hard_zone)
