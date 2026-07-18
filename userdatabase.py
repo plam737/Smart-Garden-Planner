@@ -21,8 +21,9 @@ def initialize_db():
         CREATE TABLE IF NOT EXISTS gardens (
             garden_id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT,
-            type TEXT,
-            length REAL,
+            garden_type TEXT,
+            shape TEXT, 
+            length REAL, 
             width REAL,
             diameter REAL
         )

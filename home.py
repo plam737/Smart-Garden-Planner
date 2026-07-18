@@ -1,4 +1,5 @@
 import userdatabase
+import garden
 
 def home_menu_options():
     choice = 0
@@ -20,11 +21,11 @@ def home_menu_options():
 
 def home_screen(user):
     using = True
-    print(f"Welcome to your Smart Garden Planner, {user[2]} !")
+    print(f"Welcome to your Smart Garden Planner, {user[2]}!")
     while using:
         input_ans = home_menu_options()
         if input_ans == 1:
-            print("Coming soon!")
+            garden.new_garden(user)
         elif input_ans == 2:
             print("Coming soon!")
         elif input_ans == 3:
