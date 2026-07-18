@@ -1,3 +1,13 @@
+import hardiness
+
+def hardiness_zone(city, state):
+    lon, lat = hardiness.get_coordinates(city, state)
+    if lat is None or lon is None:
+        return "NO"
+    else: 
+        zone = hardiness.get_hardiness_zone(lon, lat, state)
+        return zone
+
 def new_user():
     print("Welcome to Smart Garden Planner! \n" 
     "Before we begin, let's ask you a few questions.")
@@ -11,7 +21,12 @@ def new_user():
     " 1. Low \n 2. Medium \n 3. High \n")
     print("Congratulations! You are now a smart gardener!")
     name = input("What is your name? ")
+    zone_result = hardiness_zone(city, state)
     print(f"Welcome, {name}!")
+    if zone_result == "NO":
+        pass
+    else: 
+        print(f"Because you live in {city}, {state}, your hardiness zone is {zone_result}!")
 
 def user_menu_options():
     choice = int(input("Welcome to the Smart Garden Planner! \n"
