@@ -1,6 +1,7 @@
 import getpass
 import userdatabase
 import new_user
+import home
 
 def user_menu_options():
     choice = int(input("Welcome to the Smart Garden Planner! \n"
@@ -23,10 +24,12 @@ def main():
                 print("User not found. Please try again.")
             elif user == "Password incorrect":
                 print("Password incorrect. Please try again.")
-        print(f"Welcome back, {user[2]}!")
+        home.home_screen(user)
     
     elif (user_status == 2):
-        new_user.new_user_initiation()
+        username, password = new_user.new_user_initiation()
+        user = userdatabase.find_returning_user(username, password)
+        home.home_screen(user)
 
 if __name__ == '__main__':
     main()

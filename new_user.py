@@ -1,6 +1,7 @@
 import hardiness
 import userdatabase
 import getpass
+import home
 
 def hardiness_zone(city, state):
     lon, lat = hardiness.get_coordinates(city, state)
@@ -34,7 +35,13 @@ def new_user_initiation():
         except ValueError:
             print("Please enter a number between 1-3.")
             frequency = 0
-                
+
+    units = ""
+    if hardiness.is_canada(state):
+        units = "metric"
+    else:
+        units = "imperial"
+
     print("Congratulations! You are now a smart gardener!")
     
     name = input("What is your name? ")
@@ -42,15 +49,18 @@ def new_user_initiation():
     password = getpass.getpass("What password would you like?")
     hard_zone = hardiness_zone(city, state)
     
-    new_user_creation(username, password, name, city, state, plant_variety, frequency, hard_zone)
+
+    new_user_creation(username, password, name, city, state, units, plant_variety, frequency, hard_zone)
 
     print(f"Welcome, {name}!")
     if hard_zone == "NO":
         pass
     else: 
         print(f"Because you live in {city}, {state}, your hardiness zone is {hard_zone}!")
+    
+    return username, password
 
-def new_user_creation(username, password, name, city, state, plant_variety, frequency, hard_zone):
+def new_user_creation(username, password, name, city, state, units, plant_variety, frequency, hard_zone):
 
     if (plant_variety == 1):
         plant_variety = "Fruits"
@@ -68,4 +78,4 @@ def new_user_creation(username, password, name, city, state, plant_variety, freq
     else: 
         frequency = "High"
 
-    userdatabase.create_new_user(username, password, name, city, state, plant_variety, frequency, hard_zone)
+    userdatabase.create_new_user(username, password, name, city, state, units, plant_variety, frequency, hard_zone)
