@@ -23,7 +23,7 @@ def new_garden(user):
     input_shape = 0
     while input_shape not in range(1, 3):
         try: 
-            input_shape = int(input("What shape is the garden? Type in the number only! \n 1. Circular \n 2. Rectangular"))
+            input_shape = int(input("What shape is the garden? Type in the number only! \n 1. Circular \n 2. Rectangular \n"))
         except ValueError:
             print("Not a valid answer. Please only type in the number.") 
 
@@ -43,3 +43,36 @@ def new_garden(user):
             length = utilities.cm_to_inches(length)
             width = utilities.cm_to_inches(width)
         gardendatabase.create_new_garden(user[0], garden_type, shape, length, width, None)
+
+def display_dimensions(garden, user):
+    unit_label = ""
+    dimension_string = ""
+    length = garden[4]
+    width = garden[5]
+    diameter = garden[6]
+    if user[5] == "metric":
+        unit_label = "cm"
+        if garden[3] == "Circular":
+            diameter = utilities.inches_to_cm(diameter)
+        elif garden[3] == "Rectangular":
+            length = utilities.inches_to_cm(length)
+            width = utilities.inches_to_cm(width)
+    else:
+        unit_label = "inches"
+    if garden[3] == "Circular":
+        dimension_string = f"Diameter: {diameter} {unit_label}"
+    elif garden[3] == "Rectangular":
+        dimension_string = f"{length} x {width} {unit_label}"
+    return dimension_string
+
+def view_gardens(user):
+    gardens = gardendatabase.get_user_gardens(user[0])
+
+    if len(gardens) == 0:
+        return "You have no gardens! Please add a new garden!"
+    
+    else:
+        print("Your Gardens:")
+        for i, garden in enumerate(gardens):
+            dimensions = display_dimensions(garden, user)
+            print(f"{i+1}. {garden[2]} ({garden[3]}) - {dimensions}")  

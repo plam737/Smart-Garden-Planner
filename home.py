@@ -27,7 +27,7 @@ def home_screen(user):
         if input_ans == 1:
             garden.new_garden(user)
         elif input_ans == 2:
-            print("Coming soon!")
+            garden.view_gardens(user)
         elif input_ans == 3:
             print("Coming soon!")
         elif input_ans == 4:
