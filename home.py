@@ -1,43 +1,49 @@
 import userdatabase
 import garden
 import profile
+from rich.console import Console
+from rich.panel import Panel
+from rich.prompt import Prompt
 
-def home_menu_options():
-    choice = 0
-    try:
-        choice = int(input(
-            "Please select from the following options. \n"
-            "-----------------------------------------------\n"
-            "1. Create a New Garden \n"
-            "2. View My Gardens \n"
-            "3. View My Calendar \n"
-            "4. View My Profile \n"
-            "5. Log Out \n"
-        ))
-        if choice not in range(1,6):
-            print("Please enter a number from 1-5.")
-    except ValueError:
-        print("Please enter a number from 1-5.")
-        choice = 0
-    return choice
+console = Console()
+
+def home_menu_options(name):
+    console.clear()
+    console.print(Panel(
+        f"[turquoise2]Welcome, {name}! Please select from the following options.[/turquoise2]\n\n"
+        "[white]1. Create a New Garden[/white]\n"
+        "[white]2. View My Gardens[/white]\n"
+        "[white]3. View My Calendar[/white]\n"
+        "[white]4. View My Profile[/white]\n"
+        "[white]5. Log Out[/white]",
+        title="[bold cyan]Home Screen[/bold cyan]",
+        border_style="cyan"
+    ))
+    choice = Prompt.ask("Select an option", choices=["1", "2", "3", "4", "5"])
+    return int(choice)
 
 def home_screen(user):
     using = True
-    print(f"Welcome to your Smart Garden Planner, {user[2]}!")
     while using:
-        input_ans = home_menu_options()
+        input_ans = home_menu_options(user[2])
         if input_ans == 1:
             garden.new_garden(user)
         elif input_ans == 2:
             garden.view_gardens(user)
         elif input_ans == 3:
-            print("Coming soon!")
+            console.print("[yellow]Coming soon![/yellow]")
         elif input_ans == 4:
             user = profile.view_profile(user)
             
         else:
-            print("You are successfully logged out!\n " \
-                "Thank you for visiting your Smart Garden Planner. \n See you again!")
+            console.print(Panel(
+                "[spring_green3]Thank you for visiting your Smart Garden Planner. \n[/spring_green3]" 
+                "[spring_green3]See you again soon![/spring_green3]",
+                title="[bold green]You Are Successfully Logged Out![/bold green]",
+                border_style="green"
+            ))
+                
             using = False
+            break
         
     
