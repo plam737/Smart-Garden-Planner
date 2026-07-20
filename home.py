@@ -1,11 +1,13 @@
 import userdatabase
 import garden
+import profile
 
 def home_menu_options():
     choice = 0
     try:
         choice = int(input(
             "Please select from the following options. \n"
+            "-----------------------------------------------\n"
             "1. Create a New Garden \n"
             "2. View My Gardens \n"
             "3. View My Calendar \n"
@@ -31,7 +33,8 @@ def home_screen(user):
         elif input_ans == 3:
             print("Coming soon!")
         elif input_ans == 4:
-            print("Coming soon!")
+            user = profile.view_profile(user)
+            
         else:
             print("You are successfully logged out!\n " \
                 "Thank you for visiting your Smart Garden Planner. \n See you again!")

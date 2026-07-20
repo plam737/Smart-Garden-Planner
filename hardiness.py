@@ -57,3 +57,11 @@ def get_hardiness_zone(lon, lat, state):
     if data.get("features"):
         return data["features"][0]["attributes"][country_field_name]
     return "not found"
+
+def hardiness_zone(city, state):
+    lon, lat = get_coordinates(city, state)
+    if lat is None or lon is None:
+        return "NO"
+    else: 
+        zone = get_hardiness_zone(lon, lat, state)
+        return zone

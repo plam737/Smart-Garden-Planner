@@ -6,6 +6,7 @@ import home
 def user_menu_options():
     choice = int(input("Welcome to the Smart Garden Planner! \n"
     "Please select from the following options. \n"
+    "-----------------------------------------------\n"
     "1. Returning User \n"
     "2. New User \n"))
     return choice

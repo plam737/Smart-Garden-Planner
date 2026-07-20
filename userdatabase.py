@@ -54,3 +54,46 @@ def find_returning_user(username, password):
         return user
     else:
         return "Password incorrect"
+    
+def update_name(username, name):
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET name = ? WHERE username = ?", (name, username))
+    conn.commit()
+    conn.close()
+
+def update_units(username, units):
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET units = ? WHERE username = ?", (units, username))
+    conn.commit()
+    conn.close()
+
+def update_plant_variety(username, plant_variety):
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET plant_variety = ? WHERE username = ?", (plant_variety, username))
+    conn.commit()
+    conn.close()
+
+def update_frequency(username, frequency):
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET frequency = ? WHERE username = ?", (frequency, username))
+    conn.commit()
+    conn.close()
+
+def update_location(username, city, state, hard_zone, units):
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET city = ?, state = ?, hard_zone = ?, units = ? WHERE username = ?", (city, state, hard_zone, units, username))
+    conn.commit()
+    conn.close()
+
+def get_user_by_username(username):
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+    user = cursor.fetchone()
+    conn.close()
+    return user
