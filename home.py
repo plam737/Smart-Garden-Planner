@@ -11,15 +11,16 @@ def home_menu_options(name):
     console.clear()
     console.print(Panel(
         f"[turquoise2]Welcome, {name}! Please select from the following options.[/turquoise2]\n\n"
-        "[white]1. Create a New Garden[/white]\n"
-        "[white]2. View My Gardens[/white]\n"
-        "[white]3. View My Calendar[/white]\n"
-        "[white]4. View My Profile[/white]\n"
-        "[white]5. Log Out[/white]",
+        "[white]1. Create a New Garden\n"
+        "2. View My Gardens\n"
+        "3. Edit or Delete a Garden\n"
+        "4. View My Calendar\n"
+        "5. View My Profile\n"
+        "6. Log Out[/white]",
         title="[bold cyan]Home Screen[/bold cyan]",
         border_style="cyan"
     ))
-    choice = Prompt.ask("Select an option", choices=["1", "2", "3", "4", "5"])
+    choice = Prompt.ask("Select an option", choices=["1", "2", "3", "4", "5", "6"])
     return int(choice)
 
 def home_screen(user):
@@ -31,8 +32,10 @@ def home_screen(user):
         elif input_ans == 2:
             garden.view_gardens(user)
         elif input_ans == 3:
-            console.print("[yellow]Coming soon![/yellow]")
+            garden.edit_delete_garden(user)    
         elif input_ans == 4:
+            console.print("[yellow]Coming soon![/yellow]")
+        elif input_ans == 5:
             user = profile.view_profile(user)
             
         else:

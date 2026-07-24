@@ -20,7 +20,7 @@ def get_user_gardens(username):
     return gardens
 
 def update_garden(garden_id, username, garden_type, shape, length, width, diameter):
-    conn = sqlite3.conenct("users.db")
+    conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
     cursor.execute(
         """UPDATE gardens SET garden_type = ?, shape = ?, length = ?, width = ?, diameter = ? WHERE garden_id = ? AND username = ?""", 

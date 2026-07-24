@@ -75,8 +75,11 @@ def edit_delete_garden(user):
     ))
     action = Prompt.ask("Select an option: ", choices=["1", "2"])
     if action == "1":
-        new_garden_type = utilities.get_garden_type()
-        pass
+        unit_label = "cm" if user[5] == "metric" else "inches"
+        new_garden_type = utilities.get_garden_type(default = selected_garden[2])
+        new_shape, new_length, new_width, new_diameter = utilities.get_shape_and_dimensions(unit_label, selected_garden[4], selected_garden[5], selected_garden[6])
+        gardendatabase.update_garden(selected_garden[0], user[0], new_garden_type, new_shape, new_length, new_width, new_diameter)
+        console.print(("[bold green]Garden updated successfully![/bold green]"))
     elif action == "2":
         if Confirm.ask("Are you sure you want to delete this garden? [y/n]: "):
             gardendatabase.delete_garden(selected_garden[0], user[0])
