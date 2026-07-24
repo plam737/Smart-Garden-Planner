@@ -4,56 +4,20 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.rule import Rule
 from rich.prompt import Prompt
+from rich.prompt import IntPrompt
 from rich.table import Table
+from rich.prompt import Confirm
 
 console = Console()
 
 def new_garden(user):
     console.clear()
     unit_label = "cm" if user[5] == "metric" else "inches"
+
+    garden_type = utilities.get_garden_type()
+    shape, length, width, diameter = utilities.get_shape_and_dimensions(unit_label)
     
-    console.print(Panel(
-        "[magenta]What type of garden is this?[/magenta]\n\n"
-        "[white]1. Container (Individual)\n"
-        "2. In-Ground Garden\n"
-        "3. Raised Bed Garden[/white]",
-        title="[bold dark_magenta]Create a New Garden[/bold dark_magenta]",
-        border_style="dark_magenta"
-    ))
-    input_garden_type = int(Prompt.ask("Select an option", choices=["1", "2", "3"]))
-
-    garden_type = {
-        1: "Container",
-        2: "In-Ground",
-        3: "Raised Bed"
-    }[input_garden_type]
-
-    console.print(Panel(
-        "[magenta]What shape is the garden?[magneta]\n\n"
-        "[white]1. Circular\n"
-        "2. Rectangular[/white]",
-        title="[bold dark_magenta]Garden Shape[/bold dark_magenta]",
-        border_style="dark_magenta"
-    ))
-    input_shape = int(Prompt.ask("Select an option", choices=["1", "2"]))
-
-    if input_shape == 1:
-        shape = "Circular"
-        console.print(Rule("[magenta]Dimensions[/magenta]", style="magenta"))
-        diameter = float(Prompt.ask(f"Enter the diameter of your garden (in {unit_label})"))
-        if unit_label == "cm":
-            diameter = utilities.cm_to_inches(diameter)
-        gardendatabase.create_new_garden(user[0], garden_type, shape, None, None, diameter)
-
-    elif input_shape == 2:
-        shape = "Rectangular"
-        console.print(Rule("[magenta]Dimensions[/magenta]", style="magenta"))
-        length = float(Prompt.ask(f"Enter the length of your garden (in {unit_label})"))
-        width = float(Prompt.ask(f"Enter the width of your garden (in {unit_label})"))
-        if unit_label == "cm":
-            length = utilities.cm_to_inches(length)
-            width = utilities.cm_to_inches(width)
-        gardendatabase.create_new_garden(user[0], garden_type, shape, length, width, None)
+    gardendatabase.create_new_garden(user[0], garden_type, shape, length, width, diameter)
 
     console.print(f"\n[bold dark_magenta]Garden created successfully![/bold dark_magenta]\n")
 
@@ -85,3 +49,35 @@ def view_gardens(user):
         )
 
     console.print(table)
+
+def edit_delete_garden(user):
+    gardens = gardendatabase.get_user_gardens(user[0])
+    
+    if len(gardens) == 0:
+        console.print("[yellow]You have no gardens to edit or delete![/yellow]")
+        return
+
+    view_gardens(user)
+
+    console.print(Rule(
+        title="Which garden would you like to edit or delete?",
+        style="gold3"
+    ))
+    selected_garden_number = IntPrompt.ask("Select a garden: ", choices=[str(i+1) for i in range(len(gardens))])
+    selected_garden = gardens[selected_garden_number - 1]
+
+    console.print(Panel(
+        "[light_goldenrod3]Would you like to edit or delete a garden?[/light_goldenrod3]\n"
+        "[white]1. Edit a garden \n"
+        "2. Delete a garden [/white]",
+        title="[gold3]Edit or Delete[/gold3]",
+        border_style="gold3"
+    ))
+    action = Prompt.ask("Select an option: ", choices=["1", "2"])
+    if action == "1":
+        new_garden_type = utilities.get_garden_type()
+        pass
+    elif action == "2":
+        if Confirm.ask("Are you sure you want to delete this garden? [y/n]: "):
+            gardendatabase.delete_garden(selected_garden[0], user[0])
+            console.print(("[bold green]Garden deleted successfully![/bold green]"))

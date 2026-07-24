@@ -1,6 +1,7 @@
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
+from rich.rule import Rule
 
 console = Console()
 
@@ -64,3 +65,59 @@ def display_dimensions(garden, user):
     elif garden[3] == "Rectangular":
         dimension_string = f"{length} x {width} {unit_label}"
     return dimension_string
+
+def get_garden_type(default=None):
+    console.print(Panel(
+            "[magenta]What type of garden is this?[/magenta]\n\n"
+            "[white]1. Container (Individual)\n"
+            "2. In-Ground Garden\n"
+            "3. Raised Bed Garden[/white]",
+            title="[bold dark_magenta]Garden Type[/bold dark_magenta]",
+            border_style="dark_magenta"
+        ))
+    
+    input_garden_type = int(Prompt.ask("Select an option", choices=["1", "2", "3"], default=default))
+
+    garden_type = {
+        1: "Container",
+        2: "In-Ground",
+        3: "Raised Bed"
+    }[input_garden_type]
+
+    return garden_type
+
+def get_shape_and_dimensions(unit_label, def_length = None, def_width = None, def_diameter = None):
+    shape = ""
+    length = def_length
+    width = def_width
+    diameter = def_diameter
+    console.print(Panel(
+        "[magenta]What shape is the garden?[/magenta]\n\n"
+        "[white]1. Circular\n"
+        "2. Rectangular[/white]",
+        title="[bold dark_magenta]Garden Shape[/bold dark_magenta]",
+        border_style="dark_magenta"
+    ))
+
+    input_shape = int(Prompt.ask("Select an option", choices=["1", "2"]))
+    
+    if input_shape == 1:
+        shape = "Circular"
+        console.print(Rule("[magenta]Dimensions[/magenta]", style="magenta"))
+        diameter = float(Prompt.ask(
+            f"Enter the diameter of your garden (in {unit_label})",
+            default=str(def_diameter) if def_diameter else None
+        ))
+        if unit_label == "cm":
+            diameter = cm_to_inches(diameter)
+
+    elif input_shape == 2:
+        shape = "Rectangular"
+        console.print(Rule("[magenta]Dimensions[/magenta]", style="magenta"))
+        length = float(Prompt.ask(f"Enter the length", default=str(def_length) if def_length else None))
+        width = float(Prompt.ask(f"Enter the width", default=str(def_width) if def_width else None))
+        if unit_label == "cm":
+            length = cm_to_inches(length)
+            width = cm_to_inches(width)
+
+    return shape, length, width, diameter
