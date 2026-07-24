@@ -1,4 +1,5 @@
 import gardendatabase
+import plant
 import utilities
 from rich.console import Console
 from rich.panel import Panel
@@ -15,9 +16,10 @@ def new_garden(user):
     unit_label = "cm" if user[5] == "metric" else "inches"
 
     garden_type = utilities.get_garden_type()
+    garden_category = utilities.get_garden_category()
     shape, length, width, diameter = utilities.get_shape_and_dimensions(unit_label)
     
-    gardendatabase.create_new_garden(user[0], garden_type, shape, length, width, diameter)
+    gardendatabase.create_new_garden(user[0], garden_type, garden_category, shape, length, width, diameter)
 
     console.print(f"\n[bold dark_magenta]Garden created successfully![/bold dark_magenta]\n")
 
@@ -36,6 +38,7 @@ def view_gardens(user):
     table = Table(title="My Gardens", border_style="magenta", header_style="bold magenta")
     table.add_column("#", style="white", width=4)
     table.add_column("Type", style="white")
+    table.add_column("Category", style="white")
     table.add_column("Shape", style="white")
     table.add_column("Dimensions", style="white")
 
@@ -45,6 +48,7 @@ def view_gardens(user):
             str(i + 1),
             garden[2],
             garden[3],
+            garden[4],
             dimensions
         )
 
@@ -60,7 +64,7 @@ def edit_delete_garden(user):
     view_gardens(user)
 
     console.print(Rule(
-        title="Which garden would you like to edit or delete?",
+        title="[gold3]Which garden would you like to edit or delete?[/gold3]",
         style="gold3"
     ))
     selected_garden_number = IntPrompt.ask("Select a garden: ", choices=[str(i+1) for i in range(len(gardens))])
@@ -73,14 +77,31 @@ def edit_delete_garden(user):
         title="[gold3]Edit or Delete[/gold3]",
         border_style="gold3"
     ))
+
     action = Prompt.ask("Select an option: ", choices=["1", "2"])
+
     if action == "1":
         unit_label = "cm" if user[5] == "metric" else "inches"
         new_garden_type = utilities.get_garden_type(default = selected_garden[2])
-        new_shape, new_length, new_width, new_diameter = utilities.get_shape_and_dimensions(unit_label, selected_garden[4], selected_garden[5], selected_garden[6])
-        gardendatabase.update_garden(selected_garden[0], user[0], new_garden_type, new_shape, new_length, new_width, new_diameter)
+        new_garden_category = utilities.get_garden_category(default=selected_garden[3])
+        new_shape, new_length, new_width, new_diameter = utilities.get_shape_and_dimensions(unit_label, selected_garden[5], selected_garden[6], selected_garden[7])
+        gardendatabase.update_garden(selected_garden[0], user[0], new_garden_type, new_garden_category, new_shape, new_length, new_width, new_diameter)
         console.print(("[bold green]Garden updated successfully![/bold green]"))
+
     elif action == "2":
         if Confirm.ask("Are you sure you want to delete this garden? [y/n]: "):
             gardendatabase.delete_garden(selected_garden[0], user[0])
             console.print(("[bold green]Garden deleted successfully![/bold green]"))
+
+def select_garden_for_planting(user):
+    gardens = gardendatabase.get_user_gardens(user[0])
+    if len(gardens) == 0:
+        console.print("[yellow]You have no gardens yet! Please add a new garden.[/yellow]")
+        return
+
+    view_gardens(user)
+
+    selected_garden_number = IntPrompt.ask("Which garden would you like to add a plant to?", choices=[str(i+1) for i in range(len(gardens))])
+    selected_garden = gardens[selected_garden_number - 1]
+
+    plant.add_plant_to_garden(user, selected_garden[0], selected_garden[2], selected_garden[3])

@@ -22,10 +22,21 @@ def initialize_db():
             garden_id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT,
             garden_type TEXT,
+            garden_category TEXT,
             shape TEXT, 
             length REAL, 
             width REAL,
             diameter REAL
+        )
+    """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS plants (
+            planted_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            garden_id INTEGER,
+            username TEXT,
+            plant_name TEXT,
+            planting_date TEXT,
+            notes TEXT
         )
     """)
     conn.commit()

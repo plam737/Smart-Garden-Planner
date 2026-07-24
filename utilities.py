@@ -48,21 +48,21 @@ def get_frequency():
     return frequency
 
 def display_dimensions(garden, user):
-    length = garden[4]
-    width = garden[5]
-    diameter = garden[6]
+    length = garden[5]
+    width = garden[6]
+    diameter = garden[7]
     if user[5] == "metric":
         unit_label = "cm"
-        if garden[3] == "Circular":
+        if garden[4] == "Circular":
             diameter = inches_to_cm(diameter)
-        elif garden[3] == "Rectangular":
+        elif garden[4] == "Rectangular":
             length = inches_to_cm(length)
             width = inches_to_cm(width)
     else:
         unit_label = "inches"
-    if garden[3] == "Circular":
+    if garden[4] == "Circular":
         dimension_string = f"Diameter: {diameter} {unit_label}"
-    elif garden[3] == "Rectangular":
+    elif garden[4] == "Rectangular":
         dimension_string = f"{length} x {width} {unit_label}"
     return dimension_string
 
@@ -85,6 +85,27 @@ def get_garden_type(default=None):
     }[input_garden_type]
 
     return garden_type
+
+def get_garden_category(default=None):
+    console.print(Panel(
+        "[magenta]What kinds of plants would you like in your garden?[/magenta]\n\n"
+        "[white]1. Fruits\n"
+        "2. Vegetables\n"
+        "3. Flowers\n"
+        "4. Mixed[/white]",
+        title="[bold dark_magenta]Garden Category[/bold dark_magenta]",
+        border_style="dark_magenta"
+    ))
+    input_garden_category = int(Prompt.ask("Select an option", choices=["1", "2", "3", "4"], default=default))
+    
+    garden_category = {
+        1: "Fruits",
+        2: "Vegetables",
+        3: "Flowers",
+        4: "Mixed"
+    }[input_garden_category]
+
+    return garden_category
 
 def get_shape_and_dimensions(unit_label, def_length = None, def_width = None, def_diameter = None):
     shape = ""

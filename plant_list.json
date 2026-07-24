@@ -5,8 +5,9 @@
         "plant_type": "Perennial / Annual",
         "spacing_inches": 12,
         "water_inches_week": 1,
-        "container_friendly": "True",
+        "container_friendly": true,
         "sun_needs": "Full",
+        "category": "Flower",
         "native_region": "South Africa"
     },
     {
@@ -15,8 +16,9 @@
         "plant_type": "Perennial / Annual",
         "spacing_inches": 12,
         "water_inches_week": 1,
-        "container_friendly": "False",
+        "container_friendly": false,
         "sun_needs": "Full",
+        "category": "Flower",
         "native_region": "Mexico"
     },
     {
@@ -25,8 +27,9 @@
         "plant_type": "Annual",
         "spacing_inches": 10,
         "water_inches_week": 1,
-        "container_friendly": "False",
+        "container_friendly": false,
         "sun_needs": "Full",
+        "category": "Flower",
         "native_region": "Medditerranean"
     },
     {
@@ -35,8 +38,9 @@
         "plant_type": "Annual",
         "spacing_inches": 10,
         "water_inches_week": 1,
-        "container_friendly": "False",
+        "container_friendly": false,
         "sun_needs": "Full",
+        "category": "Flower",
         "native_region": "Medditerranean"
     },
     {
@@ -45,8 +49,9 @@
         "plant_type": "Annual",
         "spacing_inches": 12,
         "water_inches_week": 1,
-        "container_friendly": "False",
+        "container_friendly": false,
         "sun_needs": "Full",
+        "category": "Vegetable",
         "native_region": "Central and South America"
     },
     {
@@ -55,8 +60,9 @@
         "plant_type": "Perennial",
         "spacing_inches": 18,
         "water_inches_week": 1,
-        "container_friendly": "False",
+        "container_friendly": false,
         "sun_needs": "Full",
+        "category": "Flower",
         "native_region": "North America"
     }
 ]

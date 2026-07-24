@@ -1,6 +1,6 @@
 import userdatabase
 import garden
-import profile
+import user_profile
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
@@ -14,13 +14,14 @@ def home_menu_options(name):
         "[white]1. Create a New Garden\n"
         "2. View My Gardens\n"
         "3. Edit or Delete a Garden\n"
-        "4. View My Calendar\n"
-        "5. View My Profile\n"
-        "6. Log Out[/white]",
+        "4. Add a Plant to a Garden\n"
+        "5. View My Calendar\n"
+        "6. View My Profile\n"
+        "7. Log Out[/white]",
         title="[bold cyan]Home Screen[/bold cyan]",
         border_style="cyan"
     ))
-    choice = Prompt.ask("Select an option", choices=["1", "2", "3", "4", "5", "6"])
+    choice = Prompt.ask("Select an option", choices=["1", "2", "3", "4", "5", "6", "7"])
     return int(choice)
 
 def home_screen(user):
@@ -34,9 +35,11 @@ def home_screen(user):
         elif input_ans == 3:
             garden.edit_delete_garden(user)    
         elif input_ans == 4:
-            console.print("[yellow]Coming soon![/yellow]")
+            garden.select_garden_for_planting(user)
         elif input_ans == 5:
-            user = profile.view_profile(user)
+            console.print("[yellow]Coming soon![/yellow]")
+        elif input_ans == 6:
+            user = user_profile.view_profile(user)
             
         else:
             console.print(Panel(
