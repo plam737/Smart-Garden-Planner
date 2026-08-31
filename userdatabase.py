@@ -36,6 +36,24 @@ def initialize_db():
             username TEXT,
             plant_name TEXT,
             planting_date TEXT,
+            status TEXT,
+            notes TEXT
+        )
+    """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS watering_log (
+            watering_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            planted_id INTEGER, 
+            username TEXT,
+            watering_date TEXT
+        )
+    """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS harvest_log (
+            harvest_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            planted_id INTEGER, 
+            username TEXT,
+            harvest_date TEXT,
             notes TEXT
         )
     """)

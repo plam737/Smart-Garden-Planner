@@ -2,6 +2,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 from rich.rule import Rule
+import datetime
 
 console = Console()
 
@@ -142,3 +143,21 @@ def get_shape_and_dimensions(unit_label, def_length = None, def_width = None, de
             width = cm_to_inches(width)
 
     return shape, length, width, diameter
+
+def get_status():
+    status = ""
+    console.print(Panel(
+            "[light_goldenrod3]Have you already planted your plants?[/light_goldenrod3]\n\n"
+            "[white]1. Already Planted\n"
+            "2. Plant Later[/white]",
+            title="[bold gold3]Status[/bold gold3]",
+            border_style="gold3"
+        ))
+    status_match = Prompt.ask("Did you plant this already or would you like to plant this later?", choices=["1", "2"])
+    status = {
+        "1": "planted",
+        "2": "planned"
+    }[status_match]
+    date_prompt = "When did you plant this?" if status == "planted" else "When do you plan to plant this?"
+    date = Prompt.ask(f"{date_prompt} (DD/MM/YYYY)", default=datetime.date.today().strftime("%d/%m/%Y"))
+    return status, date

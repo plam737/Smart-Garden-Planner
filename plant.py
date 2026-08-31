@@ -6,6 +6,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.rule import Rule
 from rich.prompt import Prompt, Confirm
+import utilities
 
 console = Console()
 
@@ -80,9 +81,9 @@ def add_plant_to_garden(user, garden_id, garden_type, garden_category):
     console.print(table)
     selected_plant = Prompt.ask("Selected a plant ", choices=[str(i+1) for i in range(len(res))])
     selected_plant = res[int(selected_plant) - 1]
-    planting_date = Prompt.ask("Planting date (DD/MM/YYYY)", default=date.today().strftime("%d/%m/%Y"))
+    status, planting_date = utilities.get_status()
     notes = Prompt.ask("Any notes?", default="")
-    plantdatabase.add_plant(garden_id, user[0], selected_plant["plant_name"], planting_date, notes)
-    console.print(f"[bold green]✅ {selected_plant['plant_name']} added successfully![/bold green]")
+    plantdatabase.add_plant(garden_id, user[0], selected_plant["plant_name"], planting_date, status, notes)
+    console.print(f"[bold green]{selected_plant['plant_name']} added successfully![/bold green]")
 
             
