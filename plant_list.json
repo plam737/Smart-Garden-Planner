@@ -2,13 +2,14 @@
     {
         "plant_id": 1,
         "plant_name": "African Daisy",
-        "plant_type": "Perennial / Annual",
+        "plant_type": "Annual",
         "spacing_inches": 12,
         "water_inches_week": 1,
         "container_friendly": true,
         "sun_needs": "Full",
         "category": "Flower",
-        "native_region": "South Africa"
+        "ca_native": false,
+        "planting_months": [1, 2, 3, 9, 10, 11, 12]
     },
     {
         "plant_id": 2,
@@ -19,32 +20,23 @@
         "container_friendly": false,
         "sun_needs": "Full",
         "category": "Flower",
-        "native_region": "Mexico"
+        "ca_native": false,
+        "planting_months": [1, 2, 3, 4]
     },
     {
         "plant_id": 3,
-        "plant_name": "Alyssum - Purple",
-        "plant_type": "Annual",
+        "plant_name": "Alyssum",
+        "plant_type": "Perennial / Annual",
         "spacing_inches": 10,
         "water_inches_week": 1,
         "container_friendly": false,
         "sun_needs": "Full",
         "category": "Flower",
-        "native_region": "Medditerranean"
+        "ca_native": false,
+        "planting_months": [1, 2, 3, 10, 11, 12]
     },
     {
         "plant_id": 4,
-        "plant_name": "Alyssum - White",
-        "plant_type": "Annual",
-        "spacing_inches": 10,
-        "water_inches_week": 1,
-        "container_friendly": false,
-        "sun_needs": "Full",
-        "category": "Flower",
-        "native_region": "Medditerranean"
-    },
-    {
-        "plant_id": 5,
         "plant_name": "Amaranth",
         "plant_type": "Annual",
         "spacing_inches": 12,
@@ -52,10 +44,11 @@
         "container_friendly": false,
         "sun_needs": "Full",
         "category": "Vegetable",
-        "native_region": "Central and South America"
+        "ca_native": false,
+        "planting_months": [1, 2, 3]
     },
     {
-        "plant_id": 6,
+        "plant_id": 5,
         "plant_name": "Aster",
         "plant_type": "Perennial",
         "spacing_inches": 18,
@@ -63,6 +56,7 @@
         "container_friendly": false,
         "sun_needs": "Full",
         "category": "Flower",
-        "native_region": "North America"
+        "ca_native": true,
+        "planting_months": [8, 9, 10, 11]
     }
 ]
